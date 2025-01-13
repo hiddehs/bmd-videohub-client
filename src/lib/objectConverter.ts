@@ -1,17 +1,19 @@
-import { Command } from "./models/command";
-import { Label } from "./models/label";
-import { LockState } from "./models/lockState";
-import { Route } from "./models/route";
+import {Command} from "./models/command";
+import {Label} from "./models/label";
+import {LockState} from "./models/lockState";
+import {Route} from "./models/route";
 
 export function convertToObject(data: string): any {
     var obj: any = {};
-    switch (data.split("\n", 1)[0]) {
+    switch (data.split("\n", 1)[0].trim()) {
         case "PROTOCOL PREAMBLE:":
             obj.command = "protocol";
             var dataList = data.split("\n");
             for (var i = 1; i < dataList.length; i++) {
                 var rowPropertyValue = dataList[i].split(":");
-                obj[rowPropertyValue[0]] = convertStringToObject(rowPropertyValue[1].trim());
+                if (rowPropertyValue.length > 1) {
+                    obj[rowPropertyValue[0]] = convertStringToObject(rowPropertyValue[1].trim());
+                }
             }
             break;
         case "VIDEOHUB DEVICE:":
