@@ -48,7 +48,7 @@ var Videohub = /** @class */ (function () {
                 _this.client.connect(port, ip, function () {
                     setTimeout(function () {
                         resolve("connected");
-                    }, 10);
+                    }, 20); // time to get all preamble messages
                 });
                 _this.client.on("error", function (err) {
                     reject(err);
@@ -68,9 +68,6 @@ var Videohub = /** @class */ (function () {
                         var dataObj = messages_1[_i];
                         if (dataObj) {
                             var obj = converter.convertToObject(dataObj);
-                            if (obj.command === 'protocol') {
-                                resolve("connected");
-                            }
                             switch (obj.command) {
                                 case "information":
                                     delete obj.command;

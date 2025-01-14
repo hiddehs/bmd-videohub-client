@@ -26,7 +26,7 @@ export class Videohub {
                 this.client.connect(port, ip, () => {
                     setTimeout(() => {
                         resolve("connected");
-                    }, 10);
+                    }, 20); // time to get all preamble messages
                 });
                 this.client.on("error", (err) => {
                     reject(err);
@@ -45,9 +45,6 @@ export class Videohub {
                     for (let dataObj of messages) {
                         if (dataObj) {
                             var obj = converter.convertToObject(dataObj);
-                            if (obj.command === 'protocol') {
-                                resolve("connected")
-                            }
                             switch (obj.command) {
                                 case "information":
                                     delete obj.command;
