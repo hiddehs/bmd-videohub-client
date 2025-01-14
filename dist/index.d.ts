@@ -5,7 +5,8 @@ export * from './lib/models/command';
 export declare class Videohub {
     private dataSubject;
     private client;
-    constructor();
+    private debug;
+    constructor(debug?: boolean);
     connect(ip: string, port: number): Promise<string>;
     disconnect(): void;
     getDeviceInfo(): any;

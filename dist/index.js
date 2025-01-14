@@ -35,9 +35,11 @@ var stateStorage_1 = require("./lib/stateStorage");
 var lockState_1 = require("./lib/models/lockState");
 __exportStar(require("./lib/models/command"), exports);
 var Videohub = /** @class */ (function () {
-    function Videohub() {
+    function Videohub(debug) {
+        if (debug === void 0) { debug = false; }
         this.dataSubject = new rxjs_1.Subject();
         this.client = new net.Socket();
+        this.debug = debug;
     }
     Videohub.prototype.connect = function (ip, port) {
         var _this = this;
@@ -54,6 +56,8 @@ var Videohub = /** @class */ (function () {
                 _this.client.on('data', function (data) {
                     var objs = [];
                     var messages = [];
+                    if (_this.debug)
+                        console.debug([data.toString()]);
                     if (data.toString().indexOf("\n\n") === -1) {
                         messages = data.toString().split(/\r\n\r\n/);
                     }

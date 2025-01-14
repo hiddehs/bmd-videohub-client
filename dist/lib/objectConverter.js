@@ -23,7 +23,7 @@ function convertToObject(data) {
             var dataList = data.split("\n");
             for (var i = 1; i < dataList.length; i++) {
                 var rowPropertyValue = dataList[i].split(":");
-                obj[rowPropertyValue[0]] = convertStringToObject(rowPropertyValue[1].trim());
+                obj[rowPropertyValue[0].trim()] = convertStringToObject(rowPropertyValue[1].trim());
             }
             break;
         case command_1.Command.INPUT_LABELS:

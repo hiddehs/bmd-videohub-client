@@ -13,9 +13,11 @@ export class Videohub {
 
     private dataSubject = new Subject();
     private client: net.Socket
+    private debug: boolean;
 
-    constructor() {
+    constructor(debug = false) {
         this.client = new net.Socket();
+        this.debug = debug;
     }
 
     connect(ip: string, port: number): Promise<string> {
@@ -30,9 +32,11 @@ export class Videohub {
                     reject(err);
                 });
 
+
                 this.client.on('data', (data) => {
                     var objs: any[] = [];
                     var messages: string[] = []
+                    if(this.debug) console.debug([data.toString()])
                     if (data.toString().indexOf("\n\n") === -1) {
                         messages = data.toString().split(/\r\n\r\n/)
                     } else {
