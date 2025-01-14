@@ -26,7 +26,7 @@ export class Videohub {
                 this.client.connect(port, ip, () => {
                     setTimeout(() => {
                         resolve("connected");
-                    }, 20); // time to get all preamble messages
+                    }, 1000); // time to get all preamble messages
                 });
                 this.client.on("error", (err) => {
                     reject(err);
