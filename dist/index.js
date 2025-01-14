@@ -48,7 +48,7 @@ var Videohub = /** @class */ (function () {
                 _this.client.connect(port, ip, function () {
                     setTimeout(function () {
                         resolve("connected");
-                    }, 20); // time to get all preamble messages
+                    }, 1000); // time to get all preamble messages
                 });
                 _this.client.on("error", function (err) {
                     reject(err);
